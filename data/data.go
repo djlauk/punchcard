@@ -65,6 +65,31 @@ func (pcd *PunchcardData) AddProject(p *Project) error {
 	return nil
 }
 
+// RenameProject renames a Project and the entries
+func (pcd *PunchcardData) RenameProject(oldName string, newName string) error {
+	if oldName == newName {
+		return fmt.Errorf("old and new name are the same")
+	}
+	project, ok := pcd.Projects[oldName]
+	if !ok {
+		return fmt.Errorf("Project name not found: %s", oldName)
+	}
+	if _, ok := pcd.Projects[newName]; ok {
+		return fmt.Errorf("Project name already in use: %s", newName)
+	}
+	for i := range pcd.Entries {
+		e := &pcd.Entries[i]
+		if e.Project != oldName {
+			continue
+		}
+		e.Project = newName
+	}
+	project.Name = newName
+	delete(pcd.Projects, oldName)
+	pcd.Projects[newName] = project
+	return nil
+}
+
 // AddEntry adds a WorkLogEntry to the data
 func (pcd *PunchcardData) AddEntry(entry *WorkLogEntry) error {
 	if err := CheckEntry(entry, pcd.Projects); err != nil {
