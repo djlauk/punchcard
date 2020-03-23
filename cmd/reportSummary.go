@@ -20,6 +20,7 @@ package cmd
 import (
 	"fmt"
 	"log"
+	"sort"
 	"time"
 
 	"github.com/djlauk/punchcard/data"
@@ -49,9 +50,10 @@ var reportSummaryCmd = &cobra.Command{
 		if strStart != "" && strEnd != "" {
 			start := parseDate(strStart)
 			end := parseDate(strEnd)
-			summaryEntries := make(map[string]summaryEntry, len(pcd.Projects))
-			for _, p := range pcd.Projects {
-				summaryEntries[p.Name] = summaryEntry{
+			summaryEntries := make(map[string]summaryEntry, 0)
+			for name := range pcd.Projects {
+				p := pcd.Projects[name]
+				summaryEntries[name] = summaryEntry{
 					Project: &p,
 					Hours:   0,
 				}
@@ -79,7 +81,13 @@ func printSummary(start *time.Time, end *time.Time, entries map[string]summaryEn
 	for _, entry := range entries {
 		grandTotal += entry.Hours
 	}
-	for _, entry := range entries {
+	keys := make([]string, 0, len(entries))
+	for k := range entries {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, k := range keys {
+		entry := entries[k]
 		fmt.Printf("\"%s\";\"%s\";\"%.2f\";\"%.1f\"\n", entry.Project.Name, entry.Project.Reference, entry.Hours, entry.Hours*100.0/grandTotal)
 	}
 	fmt.Printf("\nTOTAL: %.2fh\n", grandTotal)
