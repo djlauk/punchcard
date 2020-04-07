@@ -86,7 +86,16 @@ func parseDate(s string) time.Time {
 	if s == "now" {
 		return time.Now().Local()
 	}
-	t, err := time.Parse(DateFormat, s)
+	if s == "today" {
+		return startOfDay(time.Now().Local())
+	}
+	if s == "tomorrow" {
+		return startOfDay(time.Now().Local().Add(24 * time.Hour))
+	}
+	if s == "yesterday" {
+		return startOfDay(time.Now().Local().Add(-24 * time.Hour))
+	}
+	t, err := time.ParseInLocation(DateFormat, s, time.Local)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -59,3 +59,57 @@ func TestParseTimeHHMMSS(t *testing.T) {
 	}
 }
 
+func TestParseDate(t *testing.T) {
+	val := parseDate("2020-04-07")
+	expected := time.Date(2020, time.April, 7, 0, 0, 0, 0, time.Local)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected: %v > %v", val, expected)
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseDateUnderstandsNow(t *testing.T) {
+	val := parseDate("now")
+	expected := time.Now()
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseDateUnderstandsToday(t *testing.T) {
+	val := parseDate("today")
+	expected := startOfToday
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseDateUnderstandsTomorrow(t *testing.T) {
+	val := parseDate("tomorrow")
+	expected := startOfToday.Add(24 * time.Hour)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseDateUnderstandsYesterday(t *testing.T) {
+	val := parseDate("yesterday")
+	expected := startOfToday.Add(-24 * time.Hour)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
