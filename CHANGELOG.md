@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Fix parsing times for `--time` parameter
+- Default time range for `report list` and `report summary` is the current day
 
 ## [0.3.0]
 

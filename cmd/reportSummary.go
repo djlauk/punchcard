@@ -105,9 +105,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// reportSummaryCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	reportSummaryCmd.Flags().String("start", "", "Start date of summary (inclusive)")
-	reportSummaryCmd.Flags().String("end", "", "End date of summary (exclusive)")
-
-	reportSummaryCmd.MarkFlagRequired("start")
-	reportSummaryCmd.MarkFlagRequired("end")
+	reportSummaryCmd.Flags().String("start", "today", "Start date of summary (inclusive)")
+	reportSummaryCmd.Flags().String("end", "tomorrow", "End date of summary (exclusive)")
 }

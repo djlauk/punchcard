@@ -45,21 +45,21 @@ var reportListCmd = &cobra.Command{
 
 		pcd := readData()
 		printEntryHeader()
-		if strStart != "" && strEnd != "" {
+		if last > 0 {
+			if last > len(pcd.Entries) {
+				last = len(pcd.Entries)
+			}
+			for i := last; i > 0; i-- {
+				entry := pcd.Entries[len(pcd.Entries)-i]
+				printEntry(&entry)
+			}
+		} else {
 			start := parseDate(strStart)
 			end := parseDate(strEnd)
 			for _, entry := range pcd.Entries {
 				if entry.Start.Before(start) || entry.Start.Equal(end) || entry.Start.After(end) {
 					continue
 				}
-				printEntry(&entry)
-			}
-		} else {
-			if last > len(pcd.Entries) {
-				last = len(pcd.Entries)
-			}
-			for i := last; i > 0; i-- {
-				entry := pcd.Entries[len(pcd.Entries)-i]
 				printEntry(&entry)
 			}
 		}
@@ -86,7 +86,7 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// reportListCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	reportListCmd.Flags().String("start", "", "Start of list (inclusive)")
-	reportListCmd.Flags().String("end", "", "End of list (exclusive)")
-	reportListCmd.Flags().Int("last", 10, "Show last NUM entries")
+	reportListCmd.Flags().String("start", "today", "Start of list (inclusive)")
+	reportListCmd.Flags().String("end", "tomorrow", "End of list (exclusive)")
+	reportListCmd.Flags().Int("last", 0, "Show last NUM entries")
 }
