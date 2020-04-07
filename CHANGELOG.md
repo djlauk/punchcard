@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0]
+
 ### Added
 
 - Add parsing relative dates for `--start` and `--end` parameters
@@ -44,6 +46,7 @@ Initial release
 - Command `punchcard work stop`
 - Command `punchcard work resume`
 
-[unreleased]: https://github.com/djlauk/punchcard/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/djlauk/punchcard/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/djlauk/punchcard/releases/v0.4.0
 [0.3.0]: https://github.com/djlauk/punchcard/releases/v0.3.0
 [0.1.0]: https://github.com/djlauk/punchcard/releases/v0.1.0
