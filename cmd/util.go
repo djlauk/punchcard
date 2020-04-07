@@ -20,6 +20,9 @@ const DateFormat = "2006-01-02"
 // TimeFormat is a ISO8601 conforming time string
 const TimeFormat = "15:04:05"
 
+// TimeFmtHHMM is a time format with hours and minutes only
+const TimeFmtHHMM = "15:04"
+
 func readData() *data.PunchcardData {
 	dataFile, err := homedir.Expand(viper.GetString("storage.data"))
 	if err != nil {
@@ -54,15 +57,29 @@ func writeData(pcd *data.PunchcardData) {
 	}
 }
 
+func startOfDay(t time.Time) time.Time {
+	y, m, d := t.Local().Date()
+	return time.Date(y, m, d, 0, 0, 0, 0, time.Local)
+}
+
 func parseTime(s string) time.Time {
 	if s == "now" {
 		return time.Now().Local()
 	}
-	t, err := time.Parse(TimeFormat, s)
+	if len(s) == len(TimeFmtHHMM) {
+		s += ":00"
+	}
+	if len(s) != len(TimeFormat) {
+		log.Fatalf("Time format not supported: %s", s)
+	}
+	t, err := time.ParseInLocation(TimeFormat, s, time.Local)
 	if err != nil {
 		log.Fatal(err)
 	}
-	return t
+	hour, minute, second := t.Clock()
+	year, month, day := time.Now().Date()
+	result := time.Date(year, month, day, hour, minute, second, 0, time.Local)
+	return result
 }
 
 func parseDate(s string) time.Time {

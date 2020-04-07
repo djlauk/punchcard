@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Fix parsing times for `--time` parameter
+
 ## [0.3.0]
 
 ### Added
