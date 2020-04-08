@@ -59,6 +59,94 @@ func TestParseTimeHHMMSS(t *testing.T) {
 	}
 }
 
+func TestParseTimeRelativePlus5Seconds(t *testing.T) {
+	val := parseTime("+5s")
+	expected := time.Now().Local().Add(5 * time.Second)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseTimeRelativeMinus5Seconds(t *testing.T) {
+	val := parseTime("-5s")
+	expected := time.Now().Local().Add(-5 * time.Second)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseTimeRelativePlus5Minutes(t *testing.T) {
+	val := parseTime("+5m")
+	expected := time.Now().Local().Add(5 * time.Minute)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseTimeRelativeMinus5Minutes(t *testing.T) {
+	val := parseTime("-5m")
+	expected := time.Now().Local().Add(-5 * time.Minute)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseTimeRelativePlus5Hours(t *testing.T) {
+	val := parseTime("+5h")
+	expected := time.Now().Local().Add(5 * time.Hour)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseTimeRelativeMinus5Hours(t *testing.T) {
+	val := parseTime("-5h")
+	expected := time.Now().Local().Add(-5 * time.Hour)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseTimeRelativePlusComplex(t *testing.T) {
+	val := parseTime("+1h2m3s")
+	expected := time.Now().Local().Add(1 * time.Hour).Add(2 * time.Minute).Add(3 * time.Second)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
+func TestParseTimeRelativeMinusComplex(t *testing.T) {
+	val := parseTime("-1h2m3s")
+	expected := time.Now().Local().Add(-1 * time.Hour).Add(-2 * time.Minute).Add(-3 * time.Second)
+	if val.Sub(expected) > 0 {
+		t.Errorf("Time math incorrect: val > expected")
+	}
+	if expected.Sub(val).Milliseconds() > 100 {
+		t.Errorf("val incorrect, expected %v, got %v", expected, val)
+	}
+}
+
 func TestParseDate(t *testing.T) {
 	val := parseDate("2020-04-07")
 	expected := time.Date(2020, time.April, 7, 0, 0, 0, 0, time.Local)

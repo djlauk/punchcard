@@ -66,6 +66,12 @@ func parseTime(s string) time.Time {
 	if s == "now" {
 		return time.Now().Local()
 	}
+	// maybe it's a duration (for a relative time stamp)
+	d, err := time.ParseDuration(s)
+	if err == nil {
+		return time.Now().Local().Add(d)
+	}
+	// not a duration, try absolute time, then
 	if len(s) == len(TimeFmtHHMM) {
 		s += ":00"
 	}
