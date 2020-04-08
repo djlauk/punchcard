@@ -38,6 +38,10 @@ var workResumeCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
+		finishCurrent, err := cmd.Flags().GetBool("finish-current")
+		if err != nil {
+			log.Fatal(err)
+		}
 		pcd := readData()
 		var entry *data.WorkLogEntry
 		if project != "" {
@@ -51,6 +55,9 @@ var workResumeCmd = &cobra.Command{
 		newEntry := *entry
 		newEntry.Start = t
 		newEntry.End = zeroTime()
+		if pcd.Current != nil && finishCurrent {
+			pcd.FinishCurrent(newEntry.Start)
+		}
 		if err := pcd.SetCurrent(&newEntry); err != nil {
 			log.Fatal(err)
 		}
@@ -72,4 +79,5 @@ func init() {
 	// workResumeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	workResumeCmd.Flags().StringP("time", "t", "now", "Time when work was resumed")
 	workResumeCmd.Flags().StringP("project", "p", "", "Project to resume")
+	workResumeCmd.Flags().BoolP("finish-current", "f", false, "Finish current work and then resume")
 }
