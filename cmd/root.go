@@ -28,7 +28,7 @@ import (
 )
 
 // VERSION is the program version
-var VERSION = "0.4.1"
+var VERSION = "0.4.2"
 
 var cfgFile string
 var verbose bool

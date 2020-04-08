@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.2](https://github.com/djlauk/punchcard/compare/v0.4.1...v0.4.2) (2020-04-08)
+
+
+### Features
+
+* add aliases for primary commands ([e61297a](https://github.com/djlauk/punchcard/commit/e61297af01677ac2ba246277c032b88bee4d8519)), closes [#8](https://github.com/djlauk/punchcard/issues/8)
+* add option --finish-current ([2d7da94](https://github.com/djlauk/punchcard/commit/2d7da94ed329b2f0765536c40863f37738792f90)), closes [#7](https://github.com/djlauk/punchcard/issues/7)
+
 ### [0.4.1](https://github.com/djlauk/punchcard/compare/v0.4.0...v0.4.1) (2020-04-08)
 
 
