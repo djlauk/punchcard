@@ -23,8 +23,9 @@ import (
 
 // reportCmd represents the report command
 var reportCmd = &cobra.Command{
-	Use:   "report",
-	Short: "Reporting related commands",
+	Use:     "report",
+	Aliases: []string{"r"},
+	Short:   "Reporting related commands",
 }
 
 func init() {

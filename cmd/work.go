@@ -23,8 +23,9 @@ import (
 
 // workCmd represents the work command
 var workCmd = &cobra.Command{
-	Use:   "work",
-	Short: "Work related commands",
+	Use:     "work",
+	Aliases: []string{"w"},
+	Short:   "Work related commands",
 }
 
 func init() {
