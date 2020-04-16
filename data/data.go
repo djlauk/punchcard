@@ -125,6 +125,14 @@ func (pcd *PunchcardData) FinishCurrent(t time.Time) error {
 	return nil
 }
 
+// GetEntry returns the WorkLogEntry at index, or nil if index < 0 or index >= len(pcd.Entries)
+func (pcd *PunchcardData) GetEntry(index int) *WorkLogEntry {
+	if index < 0 || index >= len(pcd.Entries) {
+		return nil
+	}
+	return &pcd.Entries[index]
+}
+
 // GetLastEntry returns the last WorkLogEntry in the list
 func (pcd *PunchcardData) GetLastEntry() *WorkLogEntry {
 	if len(pcd.Entries) == 0 {

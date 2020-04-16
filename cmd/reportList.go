@@ -50,28 +50,29 @@ var reportListCmd = &cobra.Command{
 				last = len(pcd.Entries)
 			}
 			for i := last; i > 0; i-- {
-				entry := pcd.Entries[len(pcd.Entries)-i]
-				printEntry(&entry)
+				idx := len(pcd.Entries) - i
+				entry := pcd.Entries[idx]
+				printEntry(idx, &entry)
 			}
 		} else {
 			start := parseDate(strStart)
 			end := parseDate(strEnd)
-			for _, entry := range pcd.Entries {
+			for idx, entry := range pcd.Entries {
 				if entry.Start.Before(start) || entry.Start.Equal(end) || entry.Start.After(end) {
 					continue
 				}
-				printEntry(&entry)
+				printEntry(idx, &entry)
 			}
 		}
 	},
 }
 
 func printEntryHeader() {
-	fmt.Println(`"Start";"End";"Hours";"Project";"Message";"Reference"`)
+	fmt.Println(`"Id";"Start";"End";"Hours";"Project";"Message";"Reference"`)
 }
 
-func printEntry(entry *data.WorkLogEntry) {
-	fmt.Printf("\"%s\";\"%s\";\"%.2f\";\"%s\";\"%s\";\"%s\"\n", formatDateTime(&entry.Start), formatDateTime(&entry.End), entry.End.Local().Sub(entry.Start.Local()).Hours(), entry.Project, entry.Message, entry.Reference)
+func printEntry(id int, entry *data.WorkLogEntry) {
+	fmt.Printf("\"%d\";\"%s\";\"%s\";\"%.2f\";\"%s\";\"%s\";\"%s\"\n", id, formatDateTime(&entry.Start), formatDateTime(&entry.End), entry.End.Local().Sub(entry.Start.Local()).Hours(), entry.Project, entry.Message, entry.Reference)
 }
 
 func init() {
