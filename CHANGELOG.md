@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.3](https://github.com/djlauk/punchcard/compare/v0.4.2...v0.4.3) (2020-04-16)
+
+
+### Features
+
+* support resuming arbitrary work log entries ([426c9ab](https://github.com/djlauk/punchcard/commit/426c9ab11aca308074a81fae14499c4820f6d32c)), closes [#9](https://github.com/djlauk/punchcard/issues/9)
+
 ### [0.4.2](https://github.com/djlauk/punchcard/compare/v0.4.1...v0.4.2) (2020-04-08)
 
 
