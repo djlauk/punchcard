@@ -38,6 +38,10 @@ var reportListCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
+		showAll, err := cmd.Flags().GetBool("all")
+		if err != nil {
+			log.Fatal(err)
+		}
 		last, err := cmd.Flags().GetInt("last")
 		if err != nil {
 			log.Fatal(err)
@@ -45,6 +49,9 @@ var reportListCmd = &cobra.Command{
 
 		pcd := readData()
 		printEntryHeader()
+		if showAll {
+			last = len(pcd.Entries)
+		}
 		if last > 0 {
 			if last > len(pcd.Entries) {
 				last = len(pcd.Entries)
@@ -90,4 +97,5 @@ func init() {
 	reportListCmd.Flags().String("start", "today", "Start of list (inclusive)")
 	reportListCmd.Flags().String("end", "tomorrow", "End of list (exclusive)")
 	reportListCmd.Flags().Int("last", 0, "Show last NUM entries")
+	reportListCmd.Flags().BoolP("all", "a", false, "Show ALL entries")
 }
