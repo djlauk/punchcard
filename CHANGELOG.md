@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.6](https://github.com/djlauk/punchcard/compare/v0.4.5...v0.4.6) (2020-05-22)
+
+
+### Features
+
+* add command report daily-totals ([6586a69](https://github.com/djlauk/punchcard/commit/6586a69131961e141849863098a0d41818c5e6b7)), closes [#11](https://github.com/djlauk/punchcard/issues/11)
+
 ### [0.4.5](https://github.com/djlauk/punchcard/compare/v0.4.4...v0.4.5) (2020-04-21)
 
 
