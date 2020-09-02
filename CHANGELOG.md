@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.7](https://github.com/djlauk/punchcard/compare/v0.4.6...v0.4.7) (2020-09-02)
+
+
+### Features
+
+* round timestamps to multiples ([35167e0](https://github.com/djlauk/punchcard/commit/35167e0a6209f6929234c7de92ce952548f32ad5)), closes [#12](https://github.com/djlauk/punchcard/issues/12)
+
 ### [0.4.6](https://github.com/djlauk/punchcard/compare/v0.4.5...v0.4.6) (2020-05-22)
 
 
