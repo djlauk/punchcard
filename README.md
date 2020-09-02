@@ -10,7 +10,7 @@ Create a configuration file in `$HOME/.punchcard.yaml`:
 # ~/.punchcard.yaml
 # configuration for punchcard
 storage:
-	data: ~/punchcard/data.yaml
+  data: ~/punchcard/data.yaml
 
 # round timestamps to this duration
 # for details on the format see https://golang.org/pkg/time/#ParseDuration
