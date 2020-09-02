@@ -63,13 +63,17 @@ func startOfDay(t time.Time) time.Time {
 }
 
 func parseTime(s string) time.Time {
+	// If 'roundTimestampsTo' is not set in the configuration,
+	// roundTo will be 0 and the rounding will not have any effect.
+	// so, no harm done.
+	roundTo := viper.GetDuration("roundTimestampsTo")
 	if s == "now" {
-		return time.Now().Local()
+		return time.Now().Local().Round(roundTo)
 	}
 	// maybe it's a duration (for a relative time stamp)
 	d, err := time.ParseDuration(s)
 	if err == nil {
-		return time.Now().Local().Add(d)
+		return time.Now().Local().Add(d).Round(roundTo)
 	}
 	// not a duration, try absolute time, then
 	if len(s) == len(TimeFmtHHMM) {

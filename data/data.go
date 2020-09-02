@@ -205,8 +205,13 @@ func CheckEntry(w *WorkLogEntry, projects ProjectMap) error {
 	if w.Message == "" {
 		return fmt.Errorf("Message must not be empty")
 	}
-	if !w.End.IsZero() && !w.Start.Before(w.End) {
-		return fmt.Errorf("Start must be before End (or End is Zero)")
+	if !w.End.IsZero() {
+		if w.Start.Equal(w.End) {
+			return fmt.Errorf("Start and End are the same (may be a rounding issue)")
+		}
+		if !w.Start.Before(w.End) {
+			return fmt.Errorf("Start must be before End (or End is Zero)")
+		}
 	}
 	return nil
 }
